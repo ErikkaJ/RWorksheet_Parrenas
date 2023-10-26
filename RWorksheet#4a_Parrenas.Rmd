@@ -60,7 +60,50 @@ shoeSize_height_data <- data.frame(
   
   cat(mean_shoeSize)
   cat(mean_height)
-  
-  
+
+#d. Is there a relationship between shoe size and height? Why?
+# yes, because shoe size generally is proportional to height
+
+#Factors
+
+Gender <- c("M","F","F","M")
+factor_Gender <- factor(Gender)
+factor_Gender
+
+#2 Construct character vector months to a factor with factor() and assign the result to factor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values.  
+
+Months <- c("March","April","January","November","January",
+"September","October","September","November","August",
+"January","November","November","February","May","August",
+"July","December","August","August","September","November","February","April")
+factor_Months <- factor(Months)
+factor_Months
+
+#3. Then check the summary() of the months_vector and factor_months_vector. | Inter-pret the results of both vectors. Are they both equally useful in this case?
+  summary(factor_Months)
+
+#4 Create a vector and factor for the table below
+
+factor_data <- c("East","West","North")
+factor_data
+
+new_order_data <- factor(factor_data,levels = c("East","West","North"))
+print(new_order_data)
+
+#5 Enter the data below in Excel with file name = import_march.csv
+#a. Import the excel file into the Environment Pane using read.table() function. Write the code.
+excel_data <- read.csv("import_march.csv")
+excel_data
+
+#b. View the dataset. Write the R scripts and its result.
+excel_data
+
+#Using Conditional Statements (IF-ELSE)
+#6 Full Search
+#a. Create an R Program that allows the User to randomly select numbers from 1 to 50.Then display the chosen number. If the number is beyond the range of the selected choice, it will have to display a string “The number selected is beyond the range of 1 to 50”. If number 20 is inputted by the User, it will have to display “TRUE”, otherwise display the input number.
+
+
+
+
 
 
