@@ -1,0 +1,71 @@
+---
+title: "RWorksheet#4b_Parrenas"
+author: "Erikka Jane Parrenas"
+date: "2023-11-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Using Loop Function
+#1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+  vectorA <- c(1, 2, 3, 4, 5)
+  zeroMatrix <- matrix(0, nrow = 5, ncol = 5)
+
+
+  for (i in 1:5){
+  for (j in 1:5){
+   
+    diff <- abs(vectorA[i] - j)
+   
+    cat(diff, " ")
+  }
+  cat("\n")
+  }
+``` 
+\n
+```{r}
+#2. Print the string "*" using for() function. The output should be the same as shown in Figure
+  
+for(i in 1:5){
+    ejp <- rep("*", i)
+    print(ejp)
+}
+```
+\n
+```{r}
+#3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+
+user_input <- as.numeric(readline("Enter a number to start the Fibonacci sequence: "))
+
+
+a <- 0
+b <- 1
+
+cat("Fibonacci sequence starting from", user_input, ": ")
+cat(user_input, " ")
+
+
+repeat {
+
+  fiboSeq <- a + b
+
+
+  if (fiboSeq > 500) {
+    break
+  }
+
+
+  cat(fiboSeq, " ")
+
+ 
+  a <- b
+  b <- fiboSeq
+}
+
+         
+```
+
