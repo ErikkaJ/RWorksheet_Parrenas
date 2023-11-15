@@ -1,0 +1,143 @@
+---
+title: "RWorksheet#3"
+author: "Erikka Jane Parrenas"
+date: "2023-10-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+#Using Vectors
+#1 There is a built-in vector LETTERS contains the uppercase letters of the alphabet and letters which contains the lowercase letters of the alphabet
+  
+  LETTERS
+  letters
+  
+#1a vector that contains the first 11 letters
+  first_11 <- head(LETTERS,11)
+  first_11
+  
+#1b vector that contains the odd numbered letters
+  AllLetters <- LETTERS
+  odd_Letters <-AllLetters[seq(1, length(AllLetters), by=2)]
+  odd_Letters
+
+#1c vector that contains the vowels
+  vow_Letters <-LETTERS [c(1,5,9,15,21)]
+  vow_Letters
+
+#1d vector that contains the last 5 lowercase letters
+  last_5 <- letters[c(22:26)]
+  last_5
+  
+#e vector that contains letters between 15 to 24 letters in lowercase
+fifteen_24 <- letters[c(15:24)]
+fifteen_24
+```
+
+```{r}
+#2a
+
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+
+#b
+temp <- c(42, 39, 34, 34, 30, 27)
+temp
+
+#c
+city_temp <- data.frame(city,temp)
+city_temp
+
+
+#d
+names(city_temp) <- c("City", "Temperature")
+city_temp
+
+#e
+str(city_temp)
+
+# the code displayed the city_temp object's structure
+# it displayed the contents and summary of the data frame
+
+#f
+twoRows <- city_temp[3:4,]
+
+#g
+highest <- city_temp[which.max(city_temp$Temperature),]
+highest
+
+lowest <- city_temp[which.min(city_temp$Temperature),]
+lowest
+```
+
+```{r}
+#USING MATRICES
+
+#2a
+matr <- matrix(c(1:8,11:14), nrow = 3, ncol = 4)
+matr
+
+#b
+mulMatr <- matr * 2
+mulMatr
+
+#c
+row_two <- mulMatr[2,]
+row_two
+
+#d
+two_cols_andRows <- mulMatr[c(1,2),c(3,4)]
+two_cols_andRows
+
+#e 
+two_cols_oneRow <- mulMatr[3,c(2,3)]
+two_cols_oneRow
+
+#f
+four_col <- mulMatr[,4]
+four_col
+
+#g 
+row_names <- c("isa", "dalawa", "tatlo")
+col_names <- c("uno", "dos", "tres", "quatro")
+
+
+#h
+matr
+dim(matr) <- c(6,2)
+matr
+```
+
+```{r}
+#ARRAYS
+
+#3a 
+values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+rep_values <- rep(values, each = 2)
+
+arr <- array(rep_values, dim = c(2,4,3))
+arr
+
+#3b 
+# three dimensions
+
+#3c
+dimnames(arr) <- list(
+  letters[1:2], # row names
+  LETTERS[1:4], # col names
+  c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array") # dim names
+)
+arr
+
+```
+  
+  
+  
+
+  
+  
+
+
