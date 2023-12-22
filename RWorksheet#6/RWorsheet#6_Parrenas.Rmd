@@ -1,0 +1,186 @@
+---
+title: "RWorksheet#6_Parrenas"
+author: "Erikka Jane Parrenas"
+date: "2023-12-22"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1.Create a data frame for the table below. Show your solution.
+```{r}
+
+Student_score <- data.frame(
+  Student = c(1:10),
+  PreTest = c(55,54,47,57,51,61,57,54,63,58),
+  PostTest = c(61,60,56,63,56,63,59,56,62,61)
+)
+
+colnames(Student_score) <- c("Student","Pre-test","Post-test")
+Student_score
+
+```
+
+#a. Compute the descriptive statistics using different packages (Hmisc and pastecs). Write the codes and its result.
+
+```{r}
+
+
+library(pastecs)
+library(Hmisc)
+
+#Hmisc
+describe(Student_score)
+
+
+#pastecs
+stat.desc(Student_score)
+
+```
+
+#2. The Department of Agriculture was studying the effects of several levels of a fertilizer on the growth of a plant. For some analyses, it might be useful to convert the fertilizer levels to an ordered factor.
+```{r}
+fertilizer_lvl <- c(10,10,10, 20,20,50,10,20,10,50,20,50,20,10)
+
+ordered_lvl <- ordered(fertilizer_lvl, levels = c(10,20,50))
+
+ordered_lvl
+
+#The levels are listed below the numbers that indicate the observations or data points, which are enclosed in square brackets. The sequence from 10 less than to 20 and 20 less than to 50 is shown by the arrow.
+```
+
+#3. Abdul Hassan, president of Floor Coverings Unlimited, has asked you to study the exercise levels undertaken by 10 subjects were “l”, “n”, “n”, “i”, “l” , “l”, “n”, “n”, “i”, “l” ; n=none, l=light, i=intense
+```{r}
+exercise_lvl <- c("l", "n", "n", "i", "l", "l", "n", "n", "i", "l")
+
+factor_exercise <- factor(exercise_lvl, levels = c("n", "l", "i"))
+
+factor_exercise
+
+```
+
+#4. Sample of 30 tax accountants from all the states and territories of Australia and their individual state of origin is specified by a character vector of state mnemonics as:
+```{r}
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+"vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+"wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+"vic", "vic", "act")
+
+factor_states <- factor(state, levels = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"))
+
+factor_states
+  #a. Apply the factor function and factor level. Describe the results.
+#The levels are listed below the observations, which are indicated by the number enclosed in square brackets. The levels correspond to the designated Australian geographical areas.
+```
+
+#5. From #4 - continuation:
+```{r}
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54,
+62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48,
+65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+
+incomeans <- tapply(incomes, factor_states, mean)
+incomeans
+
+
+#b.Copy the results and interpret.
+
+# we see that it calculates the means of every states.
+```
+
+#6. Calculate the standard errors of the state income means (refer again to number 3)
+```{r}
+#a. What is the standard error? Write the codes.
+stdError <- function(x) sqrt(var(x)/length(x))
+incoster <- tapply(incomes, factor_states, stdError)
+incoster
+
+#b. Interpret the result.
+# in no.5 we see the means of every states while here, we calculate the standard error of each states.
+
+#The sample mean earnings for each state are uncertain, and the standard errors give an indication of this uncertainty. Higher standard errors imply more variety in the estimations, whereas lower standard errors indicate better accuracy. 
+```
+
+#7. Use the titanic dataset.
+```{r}
+install.packages("titanic")
+library(titanic)
+
+data("titanic_train")
+#a. subset the titatic dataset of those who survived and not survived. Show the codes and its result.
+survived <- subset(titanic_train, Survived == 1)
+
+not_survived <- subset(titanic_train, Survived == 0)
+
+head(survived)
+head(not_survived)
+
+```
+
+#8. The data sets are about the breast cancer Wisconsin. The samples arrive periodically as Dr. Wolberg reports his clinical cases. The database therefore reflects this chronologihttps://drive.google.com/file/d/16MFLoehCgx2MJuNSAuB2CsBy6eDIIru/view?usp=drive_link)
+```{r}
+breastcancer_data <- read.csv("breastcancer_wisconsin.csv")
+
+str(breastcancer_data)
+head(breastcancer_data)
+summary(breastcancer_data)
+#a. describe what is the dataset all about.
+#the dataset is about the data of the breast cancer.
+```
+
+
+#d. Compute the descriptive statistics using different packages. Find the values of:
+```{r,error=TRUE}
+library(psych)
+
+clump_thickness <- breastcancer_data$ClumpThickness
+marginal_adhesion <- breastcancer_data$MarginalAdhesion
+bare_nuclei <- breastcancer_data$BareNuclei
+bland_chromatin <- breastcancer_data$BlandChromatin
+uniformity_cell_shape <- breastcancer_data$UniformityCellShape
+
+#d.1 Standard error of the mean for clump thickness.
+
+SE_clumpthickness <- sd(clump_thickness) / sqrt(length(clump_thickness))
+SE_clumpthickness
+
+#d.2 Coefficient of variability for Marginal Adhesion.
+CV_marginaladhesion <- sd(marginal_adhesion) / mean(marginal_adhesion)
+CV_marginaladhesion
+
+#d.3 Number of null values of Bare Nuclei.
+nullval_barenuclei <- sum(is.na(bare_nuclei))
+nullval_barenuclei
+
+#d.4 Mean and standard deviation for Bland Chromatin
+mean_blandchromatin <- mean(breastcancer_data$bland_chromatin)
+sd_blandchromatin <- sd(breastcancer_data$bland_chromatin)
+mean_blandchromatin
+sd_blandchromatin
+
+#d.5 Confidence interval of the mean for Uniformity of Cell Shape
+ci_uniformitycellshape <- tryCatch(
+  t.test(breastcancer_data$`uniformity_cell_shape`)$conf.int,
+  error = function(e) NULL
+)
+ci_uniformitycellshape
+```
+
+#9.Export the data abalone to the Microsoft excel file. Copy the codes.
+```{r}
+library("AppliedPredictiveModeling")
+library("xlsx")
+
+data(abalone)
+
+#View(abalone)
+head(abalone)
+summary(abalone)
+
+#write.xlsx(abalone, "abalone.xlsx")
+
+```
